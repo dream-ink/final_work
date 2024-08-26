@@ -15,4 +15,10 @@
 ![image](https://github.com/user-attachments/assets/ff78716c-1375-473f-a090-95baaa224324)
 ![image](https://github.com/user-attachments/assets/8cbf61e0-a666-47bf-8076-9a83bacf9c68)
 
+4. Установить и удалить deb-пакет с помощью dpkg.
 
+![image](https://github.com/user-attachments/assets/ffd47cdd-6a4f-4cde-8452-2d4e40506b8d)
+
+5. Выложить историю команд в терминале ubuntu
+
+![image](https://github.com/user-attachments/assets/6440da6d-cf63-458d-b1ef-539d39e3ef90)
