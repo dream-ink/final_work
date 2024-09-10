@@ -29,3 +29,32 @@
 войдут: Лошади, верблюды и ослы).
 ![Диаграмма без названия drawio](https://github.com/user-attachments/assets/67c2f6f9-e3ee-41c6-a666-d71166d8228c)
 
+7. В подключенном MySQL репозитории создать базу данных “Друзья
+человека”
+![image](https://github.com/user-attachments/assets/12b0ef81-2b32-475d-afc9-584632263f8a)
+
+8. Создать таблицы с иерархией из диаграммы в БД
+
+CREATE TABLE animal_classes ( 
+id INT AUTO_INCREMENT PRIMARY KEY,
+class_name VARCHAR(50) 
+);
+
+INSERT INTO animal_classes (Class_name)
+VALUES ('Домашние');
+
+INSERT INTO animal_classes (Class_name)
+VALUES ('Вьючные');
+
+SELECT * FROM animal_classes;
+
+![image](https://github.com/user-attachments/assets/a27bce1a-60f9-4009-8323-1efc77fbd767)
+
+CREATE TABLE pets_animals (
+id INT,
+
+
+
+
+
+
