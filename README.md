@@ -36,8 +36,8 @@
 8. Создать таблицы с иерархией из диаграммы в БД
 ```sql
 CREATE TABLE animal_classes ( 
-id INT AUTO_INCREMENT PRIMARY KEY,
-class_name VARCHAR(50) 
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    class_name VARCHAR(50) 
 );
 
 INSERT INTO animal_classes (Class_name)
@@ -51,7 +51,28 @@ SELECT * FROM animal_classes;
 ![image](https://github.com/user-attachments/assets/a27bce1a-60f9-4009-8323-1efc77fbd767)
 ```sql
 CREATE TABLE pets_animals (
-id INT,
+    `id` INT AUTO_INCREMENT PRIMARY KEY,
+     animal_species VARCHAR (50),
+     class_id INT,
+     FOREIGN KEY (class_id) REFERENCES animal_classes (id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+INSERT INTO pets_animals (animal_species, class_id)
+VALUES ('Кошки', 2),
+('Собаки', 2),  
+('Хомяки', 2);
+
+CREATE TABLE packs_animals (
+ `id` INT AUTO_INCREMENT PRIMARY KEY,
+     animal_species VARCHAR (50),
+     class_id INT,
+     FOREIGN KEY (class_id) REFERENCES animal_classes (id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+INSERT INTO packs_animals (animal_species, class_id)
+VALUES ('Лошади', 1),
+('Ослы', 1),  
+('Верблюды', 1); 
 ```
 
 
