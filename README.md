@@ -35,6 +35,7 @@
 
 8. Создать таблицы с иерархией из диаграммы в БД
 ```sql
+DROP TABLE IF EXISTS animal_classes;
 CREATE TABLE animal_classes ( 
     id INT AUTO_INCREMENT PRIMARY KEY,
     class_name VARCHAR(50) 
@@ -50,6 +51,8 @@ SELECT * FROM animal_classes;
 ```
 ![image](https://github.com/user-attachments/assets/a27bce1a-60f9-4009-8323-1efc77fbd767)
 ```sql
+
+DROP TABLE IF EXISTS pets_animals;
 CREATE TABLE pets_animals (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
      animal_species VARCHAR (50),
@@ -62,6 +65,7 @@ VALUES ('Кошки', 2),
 ('Собаки', 2),  
 ('Хомяки', 2);
 
+DROP TABLE IF EXISTS packs_animals;
 CREATE TABLE packs_animals (
  `id` INT AUTO_INCREMENT PRIMARY KEY,
      animal_species VARCHAR (50),
@@ -76,21 +80,24 @@ VALUES ('Лошади', 1),
 ```
 9. Заполнить низкоуровневые таблицы именами(животных), командами которые они выполняют и датами рождения
 ```sql
+DROP TABLE IF EXISTS dogs;
 CREATE TABLE dogs (       
     Id INT AUTO_INCREMENT PRIMARY KEY, 
     name VARCHAR(50), 
     birthday DATE,
-    vommands VARCHAR(50),
+    commands VARCHAR(50),
     subspecies_id int,
     FOREIGN KEY (subspecies_id) REFERENCES pets_animals (id) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
 INSERT INTO dogs (name, birthday, commands, subspecies_id)
 VALUES ('Шарик', '2024-05-06', 'Сидеть', 2),
-('Матрос', '2024-01-12', "Дай лапу", 2),  
-('Псина', '2024-03-11', "Фу", 2), 
-('Счастливчик', '2022-03-12', "Кто хороший мальчик?", 2
+('Матрос', '2024-01-12', 'Дай лапу', 2),  
+('Псина', '2024-03-11', 'Фу', 2), 
+('Счастливчик', '2022-03-12', 'Кто хороший мальчик?', 2
 );
 
+DROP TABLE IF EXISTS cats;
 CREATE TABLE cats (       
     Id INT AUTO_INCREMENT PRIMARY KEY, 
     name VARCHAR(50), 
@@ -102,9 +109,75 @@ CREATE TABLE cats (
 
 INSERT INTO cats (name, birthday, commands, subspecies_id)
 VALUES ('Мурка', '2024-02-06', 'кскс', 1),
-('Мурзик', '2023-01-12', "Иди кушать", 1),  
-('Ася', '2021-03-12', "кскс", 1), 
-('Айрис', '2023-06-11', "Где моя кошечка?", 1
+('Мурзик', '2023-01-12', 'Иди кушать', 1),  
+('Ася', '2021-03-12', 'кскс', 1), 
+('Айрис', '2023-06-11', 'Где моя кошечка?', 1
 );
 
+DROP TABLE IF EXISTS hamsters;
+CREATE TABLE hamsters (       
+    id INT AUTO_INCREMENT PRIMARY KEY, 
+    name VARCHAR(50), 
+    birthday DATE,
+    commands VARCHAR(50),
+    subspecies_id int,
+    FOREIGN KEY (subspecies_id) REFERENCES pets_animals (id) ON DELETE CASCADE ON UPDATE CASCADE
+);
 
+INSERT INTO hamsters (name, birthday, commands, subspecies_id)
+VALUES ('Мили', '2024-10-03', NULL, 3),
+('Степан', '2024-06-09', NULL, 3),  
+('Капля', '2021-05-17', NULL, 3), 
+('Звезда', '2020-01-09', NULL, 3
+);
+
+DROP TABLE IF EXISTS horses;
+CREATE TABLE horses (
+id INT AUTO_INCREMENT PRIMARY KEY, 
+    name VARCHAR(50), 
+    birthday DATE,
+    commands VARCHAR(50),
+    subspecies_id int,
+    FOREIGN KEY (subspecies_id) REFERENCES packs_animals (id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+INSERT INTO horses (name, birthday, commands, subspecies_id)
+VALUES ('Левик', '2019-11-03', 'Прууу', 1),
+('Бурый', '2022-04-09', 'Бегом', 1),  
+('Молниеносец', '2018-05-12', 'Ам Ам', 1), 
+('Тайфун', '2020-01-04', 'Стой', 1
+);
+
+DROP TABLE IF EXISTS donkeys;
+CREATE TABLE donkeys (
+id INT AUTO_INCREMENT PRIMARY KEY, 
+    name VARCHAR(50), 
+    birthday DATE,
+    commands VARCHAR(50),
+    subspecies_id int,
+    FOREIGN KEY (subspecies_id) REFERENCES packs_animals (id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+INSERT INTO donkeys (name, birthday, commands, subspecies_id)
+VALUES ('Мартин', '2019-11-03', 'Стой', 2),
+('Зефир', '2022-03-09', 'Иди', 2),  
+('Буревестник', '2019-07-12', 'Стой', 2), 
+('Пухляш', '2024-02-04', 'Стой', 2
+);
+
+DROP TABLE IF EXISTS camels;
+CREATE TABLE camels (
+id INT AUTO_INCREMENT PRIMARY KEY, 
+    name VARCHAR(50), 
+    birthday DATE,
+    commands VARCHAR(50),
+    subspecies_id int,
+    FOREIGN KEY (subspecies_id) REFERENCES packs_animals (id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+INSERT INTO camels (name, birthday, commands, subspecies_id)
+VALUES ('Саванна', '2019-11-03', 'Где это мы?', 3),
+('Улыбка', '2021-06-05', 'Ищи воду', 3),  
+('Жемчужина', '2017-07-06', 'Садись', 3), 
+('Песчаник', '2022-04-04', 'Стой', 3
+);
