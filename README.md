@@ -40,10 +40,10 @@ CREATE TABLE animal_classes (
     class_name VARCHAR(50) 
 );
 
-INSERT INTO animal_classes (Class_name)
+INSERT INTO animal_classes (сlass_name)
 VALUES ('Домашние');
 
-INSERT INTO animal_classes (Class_name)
+INSERT INTO animal_classes (сlass_name)
 VALUES ('Вьючные');
 
 SELECT * FROM animal_classes;
@@ -74,8 +74,37 @@ VALUES ('Лошади', 1),
 ('Ослы', 1),  
 ('Верблюды', 1); 
 ```
+9. Заполнить низкоуровневые таблицы именами(животных), командами которые они выполняют и датами рождения
+```sql
+CREATE TABLE dogs (       
+    Id INT AUTO_INCREMENT PRIMARY KEY, 
+    name VARCHAR(50), 
+    birthday DATE,
+    vommands VARCHAR(50),
+    subspecies_id int,
+    FOREIGN KEY (subspecies_id) REFERENCES pets_animals (id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+INSERT INTO dogs (name, birthday, commands, subspecies_id)
+VALUES ('Шарик', '2024-05-06', 'Сидеть', 2),
+('Матрос', '2024-01-12', "Дай лапу", 2),  
+('Псина', '2024-03-11', "Фу", 2), 
+('Счастливчик', '2022-03-12', "Кто хороший мальчик?", 2
+);
 
+CREATE TABLE cats (       
+    Id INT AUTO_INCREMENT PRIMARY KEY, 
+    name VARCHAR(50), 
+    birthday DATE,
+    commands VARCHAR(50),
+    subspecies_id int,
+    FOREIGN KEY (subspecies_id) REFERENCES pets_animals (id) ON DELETE CASCADE ON UPDATE CASCADE
+);
 
-
+INSERT INTO cats (name, birthday, commands, subspecies_id)
+VALUES ('Мурка', '2024-02-06', 'кскс', 1),
+('Мурзик', '2023-01-12', "Иди кушать", 1),  
+('Ася', '2021-03-12', "кскс", 1), 
+('Айрис', '2023-06-11', "Где моя кошечка?", 1
+);
 
 
