@@ -250,3 +250,24 @@ SELECT * FROM young_animals;
 
 12. Объединить все таблицы в одну, при этом сохраняя поля, указывающие на
 прошлую принадлежность к старым таблицам.
+```sql
+DROP TABLE IF EXISTS all_animals;
+CREATE TABLE all_animals AS
+SELECT *, 'horses_donkeys' AS previous_table
+FROM horses_donkeys
+UNION
+SELECT *, 'cats' AS previous_table
+FROM cats
+UNION
+SELECT *, 'dogs' AS previous_table
+FROM dogs
+UNION
+SELECT *, 'hamsters' AS previous_table
+FROM hamsters
+UNION
+SELECT *, 'YoungAnimals' AS previous_table
+FROM young_animals;
+SELECT * FROM all_animals;
+```
+![image](https://github.com/user-attachments/assets/af8664f4-a1ea-4b14-90d7-8930432a4b8d)
+
