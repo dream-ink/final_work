@@ -181,3 +181,70 @@ VALUES ('Саванна', '2019-11-03', 'Где это мы?', 3),
 ('Жемчужина', '2017-07-06', 'Садись', 3), 
 ('Песчаник', '2022-04-04', 'Стой', 3
 );
+```
+10. Удалив из таблицы верблюдов, т.к. верблюдов решили перевезти в другой
+питомник на зимовку. Объединить таблицы лошади, и ослы в одну таблицу.
+
+```sql
+DROP TABLE IF EXISTS camels;
+DROP TABLE IF EXISTS horses_donkeys;
+CREATE TABLE horses_donkeys (
+id INT AUTO_INCREMENT PRIMARY KEY, 
+    name VARCHAR(50), 
+    birthday DATE,
+    commands VARCHAR(50),
+    subspecies_id int,
+    FOREIGN KEY (subspecies_id) REFERENCES packs_animals (id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+INSERT INTO horses_donkeys (name, birthday, commands, subspecies_id) SELECT name, birthday, commands, subspecies_id FROM horses;
+INSERT INTO horses_donkeys (name, birthday, commands, subspecies_id) SELECT name, birthday, commands, subspecies_id FROM donkeys;
+DROP TABLE IF EXISTS horses;
+DROP TABLE IF EXISTS donkeys;
+```
+
+11.Создать новую таблицу “молодые животные” в которую попадут все
+животные старше 1 года, но младше 3 лет и в отдельном столбце с точностью
+до месяца подсчитать возраст животных в новой таблице
+```sql
+DROP TABLE IF EXISTS young_animals;
+CREATE TABLE young_animals (
+    id int NOT NULL, 
+    name VARCHAR(50), 
+    birthday DATE,
+    commands VARCHAR(50),
+    age VARCHAR(50)
+);
+
+INSERT INTO young_animals (id, name, birthday, commands, age)
+SELECT id, name, birthday, commands,
+CONCAT(CAST(TIMESTAMPDIFF(YEAR, birthday, NOW()) AS CHAR), " ЛЕТ ",
+CAST(MOD(TIMESTAMPDIFF(MONTH, birthday, NOW()), 12) AS CHAR), " МЕС ") AS age
+FROM cats
+WHERE TIMESTAMPDIFF(MONTH, birthday, NOW()) BETWEEN 12 AND 36;
+
+INSERT INTO young_animals (id, name, birthday, commands, age)
+SELECT id, name, birthday, commands,
+CONCAT(CAST(TIMESTAMPDIFF(YEAR, birthday, NOW()) AS CHAR), " ЛЕТ ",
+CAST(MOD(TIMESTAMPDIFF(MONTH, birthday, NOW()), 12) AS CHAR), " МЕС ") AS age
+FROM dogs
+WHERE TIMESTAMPDIFF(MONTH, birthday, NOW()) BETWEEN 12 AND 36;
+
+INSERT INTO young_animals (id, name, birthday, commands, age)
+SELECT id, name, birthday, commands,
+CONCAT(CAST(TIMESTAMPDIFF(YEAR, birthday, NOW()) AS CHAR), " ЛЕТ ",
+CAST(MOD(TIMESTAMPDIFF(MONTH, birthday, NOW()), 12) AS CHAR), " МЕС ") AS age
+FROM hamsters
+WHERE TIMESTAMPDIFF(MONTH, birthday, NOW()) BETWEEN 12 AND 36;
+
+INSERT INTO young_animals (id, name, birthday, commands, age)
+SELECT id, name, birthday, commands,
+CONCAT(CAST(TIMESTAMPDIFF(YEAR, birthday, NOW()) AS CHAR), " ЛЕТ ",
+CAST(MOD(TIMESTAMPDIFF(MONTH, birthday, NOW()), 12) AS CHAR), " МЕС ") AS age
+FROM horses_donkeys
+WHERE TIMESTAMPDIFF(MONTH, birthday, NOW()) BETWEEN 12 AND 36;
+
+SELECT * FROM young_animals;
+```
+![image](https://github.com/user-attachments/assets/1b7a3414-5834-4099-9b3d-22d29b491106)
+
